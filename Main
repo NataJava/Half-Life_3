@@ -1,0 +1,33 @@
+import java.io.*;
+
+public class Main {
+
+    private static final String FILENAME = "progress.dat";
+
+    public static void main (String [] arg) {
+
+        Progress currentProgress=new Progress(50,70,"2 этаж",15);
+
+        private static void save(Progress) {
+           try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILENAME))) {
+                oos.writeObject(currentProgress);
+           } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+
+        private static void load(Progress){
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILENAME))){
+                currentProgress=(Progress)ois.readObject();
+                           System.out.printf("Ваш прогресс: \n здоровье - %d ед.,\n броня - %d ед., \n вы находитесь - %s, \n ваш уровень - %d ",
+                                 currentProgress.getHealth(),
+                                 currentProgress.getArmor(),
+                                 currentProgress.getPlace(),
+                                 currentProgress.getLevel());
+
+            } catch(IOException | ClassNotFoundException ex){
+                System.out.println(ex);
+            }
+        }
+    }
+}
